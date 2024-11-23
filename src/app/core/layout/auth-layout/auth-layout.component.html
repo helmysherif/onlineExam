@@ -1,0 +1,27 @@
+<section class="auth-layout">
+  <div class="auth-layout-card grid">
+    <div class="auth-layout-card-left col-6">
+      <p class="welcome-text">
+        welcome to <br> <span>elevate</span>
+      </p>
+      <p class="welcome-desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis, provident.</p>
+      <img src="images/bro.svg" alt="">
+    </div>
+    <div class="auth-layout-card-right col-6">
+      <div class="tabs-view">
+        <p-dropdown 
+          [options]="languages" 
+          [(ngModel)]="selectedLang" 
+          optionLabel="name"
+          placeholder="select language" 
+          class = "languages-dropdown"
+        />
+        <button routerLinkActive="active" class = "signin-btn" routerLink="login">sign in</button>
+        <button routerLinkActive="active" class = "signin-btn" routerLink="register">register</button>
+      </div>
+      <div class="auth-form">
+        <router-outlet />
+      </div>
+    </div>
+  </div>
+</section>

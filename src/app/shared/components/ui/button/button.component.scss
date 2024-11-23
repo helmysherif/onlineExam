@@ -1,0 +1,20 @@
+@import "../../../../styles/fonts.scss";
+.clicked-btn {
+  width: 100%;
+  border: 0;
+  // background-color: var(--button-color);
+  // color: var(--white-color);
+  @extend .poppins-font;
+  font-size: 15px;
+  text-transform: capitalize;
+  font-weight: 500;
+  border-radius: 15px;
+  padding: 10px 0;
+  margin-top: 15px;
+  cursor: pointer;
+  &.btn-disabled
+  {
+    opacity: .7;
+    cursor:not-allowed !important;
+  }
+}

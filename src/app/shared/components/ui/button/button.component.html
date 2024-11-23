@@ -1,0 +1,12 @@
+<button 
+  class = "clicked-btn"
+  [ngStyle]="{
+    'background' : background(),
+    'color' : color(),
+    'border-radius.px' : borderRadius()
+  }"
+  (click)="clickOnBtn()"
+  [type]="buttonType()"
+  [disabled]="disabled()"
+  [class.btn-disabled]="disabled()"
+>{{buttonName()}}</button>

@@ -1,0 +1,65 @@
+<section class="login-page">
+  <div class="form-container">
+    <p class="title">sign in</p>
+    <form class = "mt-5" [formGroup]="loginForm">
+      <div class="form-group">
+        <input 
+          type = "email" 
+          id = "email"
+          placeholder="enter email"
+          pInputText
+          class = "w-full"
+          autocomplete="off"
+          formControlName = "email"
+          [ngClass]="{
+            'ng-invalid ng-dirty' : (loginForm.get('email')?.hasError('required') && loginForm.get('email')?.touched) || loginForm.get('email')?.hasError('email')
+          }"
+        />
+        @if(loginForm.get("email")?.hasError("required") && loginForm.get("email")?.touched)
+        {
+          <small class = "errorMsg">email is required</small>
+        }
+        @if(loginForm.get("email")?.hasError("email"))
+        {
+          <small class = "errorMsg">invalid email</small>
+        }
+      </div>
+      <div class="form-group mt-5">
+        <p-password 
+          [toggleMask]="true" 
+          class = "password-input"
+          placeholder="Password"
+          autocomplete="off"
+          formControlName = "password"
+          [ngClass]="{
+            'ng-invalid ng-dirty' : (loginForm.get('password')?.hasError('required') && loginForm.get('password')?.touched) || loginForm.get('password')?.hasError('pattern') || loginForm.get('password')?.hasError('minlength')
+          }"
+        />
+        @if(loginForm.get("password")?.hasError("required") && loginForm.get("password")?.touched)
+        {
+          <small class = "errorMsg">password is required</small>
+        }
+        @if(loginForm.get("password")?.hasError("minlength"))
+        {
+          <small class = "errorMsg">the password must be not less than 6 characters</small>
+        }
+        @if(loginForm.get("password")?.hasError("pattern") && !loginForm.get("password")?.hasError("minlength"))
+        {
+          <small class = "errorMsg">the password must contain at least 1 number and 1 capital letter</small>
+        }
+      </div>
+      <div class = "text-right mt-2">
+        <button class = "recover-password-btn">recover password?</button>
+      </div>
+      <app-button 
+        buttonName = "sign in"
+        background = "#4461F2"
+        color = "#ffffff"
+        [borderRadius] = 15
+        [disabled]="loginForm.invalid"
+        buttonType = "button"
+        (onClick)="signIn()"
+      />
+    </form>
+  </div>
+</section>
