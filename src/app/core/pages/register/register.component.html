@@ -1,1 +1,71 @@
-<p>register works!</p>
+<section class="register-page">
+  <div class="form-container">
+    <p class="title">Sign up</p>
+    <form [formGroup]="registerForm">
+      <div class="form-group">
+        <input 
+          type = "text" 
+          id = "fname"
+          placeholder="first name"
+          pInputText
+          class = "w-full"
+          autocomplete="off"
+          formControlName = "firstName"
+        />
+      </div>
+      <div class="form-group mt-4">
+        <input 
+          type = "text" 
+          id = "lname"
+          placeholder="last name"
+          pInputText
+          class = "w-full"
+          autocomplete="off"
+          formControlName = "lastName"
+        />
+      </div>
+      <div class="form-group mt-4">
+        <input 
+          type = "email" 
+          id = "email"
+          placeholder="Email"
+          pInputText
+          class = "w-full"
+          autocomplete="off"
+          formControlName = "email"
+        />
+      </div>
+      <div class="form-group mt-4">
+        <p-password 
+          [toggleMask]="true" 
+          class = "password-input"
+          placeholder="Password"
+          autocomplete="off"
+          formControlName = "password"
+        />
+      </div>
+      <div class="form-group mt-4">
+        <p-password 
+          [toggleMask]="true" 
+          class = "password-input"
+          placeholder="Confirm Password"
+          autocomplete="off"
+          formControlName = "confirmPassword"
+        />
+      </div>
+      <p class="account-exists">
+        Already have an account?
+        <a routerLink = "/auth/login">Login</a>
+      </p>
+      <app-button 
+        buttonName = "create account"
+        background = "#4461F2"
+        color = "#ffffff"
+        [borderRadius] = 15
+        buttonType = "button"
+        (onClick)="register()"
+        [disabled]="registerForm.invalid"
+        />
+    </form>
+  </div>
+</section>

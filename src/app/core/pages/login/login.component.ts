@@ -4,10 +4,11 @@ import { PasswordModule } from 'primeng/password';
 import { ButtonComponent } from "../../../shared/components/ui/button/button.component";
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { ErrorMessageComponent } from "../../../shared/components/ui/error-message/error-message.component";
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [InputTextModule, PasswordModule, ButtonComponent , ReactiveFormsModule , CommonModule],
+  imports: [InputTextModule, PasswordModule, ButtonComponent, ReactiveFormsModule, CommonModule, ErrorMessageComponent],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
@@ -29,7 +30,6 @@ export class LoginComponent {
   }
   signIn()
   {
-    console.log(this.loginForm);
     console.log(this.loginForm.value);
   }
 }

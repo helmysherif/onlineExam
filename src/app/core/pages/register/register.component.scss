@@ -1,0 +1,55 @@
+@import "../../../styles/fonts";
+.register-page
+{
+  .form-container
+  {
+    width: 500px;
+    margin: auto;
+    margin-top: 32px;
+    .title
+    {
+      @extend .inter-font;
+      color:var(--black-color);
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+    input
+    {
+      &::placeholder
+      {
+        text-transform: capitalize;
+        color:var(--grey-color);
+        @extend .inter-font;
+      }
+    }
+    .account-exists
+    {
+      text-align: center;
+      color:var(--grey-color3);
+      @extend .poppins-font;
+      font-size: 0.9rem;
+      a
+      {
+        color:var(--button-color);
+        cursor: pointer;
+        font-weight: 500;
+      }
+    }
+  }
+}
+::ng-deep .password-input
+{
+  .p-inputtext , .p-password
+  {
+    width: 100% !important;
+  }
+  .p-inputtext
+  {
+    &::placeholder
+    {
+      text-transform: capitalize !important;
+      color:var(--grey-color) !important;
+      @extend .inter-font;
+    }
+  }
+}
