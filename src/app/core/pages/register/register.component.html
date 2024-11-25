@@ -11,7 +11,14 @@
           class = "w-full"
           autocomplete="off"
           formControlName = "firstName"
+          [ngClass]="{
+            'ng-invalid ng-dirty' : (registerForm.get('firstName')?.hasError('required') && registerForm.get('firstName')?.touched)
+          }"
         />
+        @if(registerForm.get("firstName")?.hasError("required") && registerForm.get("firstName")?.touched)
+        {
+          <app-error-message message = "first name is required" />
+        }
       </div>
       <div class="form-group mt-4">
         <input 
@@ -22,7 +29,14 @@
           class = "w-full"
           autocomplete="off"
           formControlName = "lastName"
+          [ngClass]="{
+            'ng-invalid ng-dirty' : (registerForm.get('lastName')?.hasError('required') && registerForm.get('lastName')?.touched)
+          }"
         />
+        @if(registerForm.get("lastName")?.hasError("required") && registerForm.get("lastName")?.touched)
+        {
+          <app-error-message message = "last name is required" />
+        }
       </div>
       <div class="form-group mt-4">
         <input 
@@ -34,6 +48,14 @@
           autocomplete="off"
           formControlName = "email"
         />
+        @if(registerForm.get("email")?.hasError("required") && registerForm.get("email")?.touched)
+        {
+          <app-error-message message = "email is required" />
+        }
+        @if(registerForm.get("email")?.hasError("email"))
+        {
+          <app-error-message message = "invalid email" />
+        }
       </div>
       <div class="form-group mt-4">
         <p-password 
@@ -42,7 +64,20 @@
           placeholder="Password"
           autocomplete="off"
           formControlName = "password"
+          [feedback]="false"
         />
+        @if(registerForm.get("password")?.hasError("required") && registerForm.get("password")?.touched)
+        {
+          <app-error-message message = "password is required" />
+        }
+        @if(registerForm.get("password")?.hasError("minlength"))
+        {
+          <app-error-message message = "the password must be not less than 6 characters" />
+        }
+        @if(registerForm.get("password")?.hasError("pattern") && !registerForm.get("password")?.hasError("minlength"))
+        {
+          <app-error-message message = "the password must contain at least 1 number and 1 capital letter" />
+        }
       </div>
       <div class="form-group mt-4">
         <p-password 
@@ -50,8 +85,20 @@
           class = "password-input"
           placeholder="Confirm Password"
           autocomplete="off"
+          [feedback]="false"
           formControlName = "confirmPassword"
+          [ngClass]="{
+            'ng-invalid ng-dirty' : (registerForm.get('confirmPassword')?.hasError('required') && registerForm.get('confirmPassword')?.touched) || (registerForm.hasError('mismatch') && !registerForm.get('confirmPassword')?.hasError('required'))
+          }"
         />
+        @if(registerForm.get("confirmPassword")?.hasError("required") && registerForm.get("confirmPassword")?.touched)
+        {
+          <app-error-message message = "confirm Password is required" />
+        }
+        @if(registerForm.hasError("mismatch") && !registerForm.get("confirmPassword")?.hasError("required"))
+        {
+          <app-error-message message = "password and confirm password are not match" />
+        }
       </div>
       <p class="account-exists">
         Already have an account?

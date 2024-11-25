@@ -5,6 +5,7 @@ import { ButtonComponent } from "../../../shared/components/ui/button/button.com
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ErrorMessageComponent } from "../../../shared/components/ui/error-message/error-message.component";
+import { AuthService } from '../../services/auth.service';
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -15,7 +16,8 @@ import { ErrorMessageComponent } from "../../../shared/components/ui/error-messa
 export class LoginComponent {
   loginForm!:FormGroup;
   constructor(
-    private fb:FormBuilder
+    private fb:FormBuilder,
+    private authService:AuthService
   ){}
   ngOnInit()
   {
@@ -23,13 +25,22 @@ export class LoginComponent {
       email:[null , [Validators.required , Validators.email]],
       password:[null , [
         Validators.required,
-        Validators.pattern(/^(?=.*[A-Z])(?=.*\d).+$/),
+        // Validators.pattern(/^(?=.*[A-Z])(?=.*\d).+$/),
+        Validators.pattern(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/),
         Validators.minLength(6)
       ]]
     })  
   }
   signIn()
   {
-    console.log(this.loginForm.value);
+    if(this.loginForm.valid)
+    {
+      console.log(this.loginForm.value);
+      this.authService.login(this.loginForm.value).subscribe({
+        next : (res) => {
+          console.log(res);
+        }
+      })
+    }
   }
 }

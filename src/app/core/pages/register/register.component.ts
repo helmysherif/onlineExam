@@ -33,13 +33,15 @@ export class RegisterComponent {
       ]],
       confirmPassword:[null , [
         Validators.required,
-        Validators.pattern(/^(?=.*[A-Z])(?=.*\d).+$/),
+        // Validators.pattern(/^(?=.*[A-Z])(?=.*\d).+$/),
         Validators.minLength(6)
       ]]
-    },{ validators:matchPasswordValidator('password' , 'confirmPassword') })
+    },{ validators:matchPasswordValidator })
   }
   register()
   {
+    console.log(this.registerForm);
+    console.log(this.registerForm.get("confirmPassword")?.hasError("mismatch"));
     console.log(this.registerForm.value);
   }
 }
