@@ -1,6 +1,6 @@
 import { AbstractControl, FormGroup } from "@angular/forms";
 export function matchPasswordValidator(control:AbstractControl){
-  return control.get("password")?.value === control.get("confirmPassword")?.value ? null : {mismatch:true}
+  return control.get("password")?.value === control.get("rePassword")?.value ? null : {mismatch:true}
 }
 // export function matchPasswordValidator(controlName: string, matchingControlName: string) {
 //   return (formGroup: FormGroup) => {

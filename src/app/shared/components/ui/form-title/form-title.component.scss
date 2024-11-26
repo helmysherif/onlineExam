@@ -1,0 +1,9 @@
+@import "../../../../styles/fonts";
+.title
+{
+  @extend .inter-font;
+  color:var(--black-color);
+  font-size: 1.2rem;
+  text-transform: capitalize;
+  font-weight: bold;
+}

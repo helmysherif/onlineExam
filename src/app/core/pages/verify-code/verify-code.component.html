@@ -1,0 +1,33 @@
+<section class="verify-code">
+  <app-form-title text = "verify code" />
+  <form [formGroup]="verifyCodeForm">
+    <div class="form-group mb-2" style = "position: relative;">
+      <input 
+        type = "text" 
+        id = "text"
+        placeholder="enter code"
+        pInputText
+        class = "w-full"
+        autocomplete="off"
+        formControlName = "resetCode"
+        [ngClass]="{
+          'ng-invalid ng-dirty' : (verifyCodeForm.get('resetCode')?.hasError('required') && verifyCodeForm.get('resetCode')?.touched)
+        }"
+      />
+      @if(verifyCodeForm.get("resetCode")?.hasError("required") && verifyCodeForm.get("resetCode")?.touched)
+      {
+        <app-error-message message = "code is required" />
+      }
+    </div>
+    <p class = "send-code-again">Didn't receieve a code? <span>resend</span> </p>
+    <app-button 
+      buttonName = "verify"
+      background = "#4461F2"
+      color = "#ffffff"
+      [borderRadius] = 15
+      buttonType = "button"
+      (onClick)="verifyCode()"
+      [disabled]="verifyCodeForm.invalid"
+    />
+  </form>
+</section>

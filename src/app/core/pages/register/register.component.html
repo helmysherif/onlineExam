@@ -1,6 +1,6 @@
 <section class="register-page">
   <div class="form-container">
-    <p class="title">Sign up</p>
+    <app-form-title text="Sign up" />
     <form [formGroup]="registerForm">
       <div class="form-group">
         <input 
@@ -36,6 +36,46 @@
         @if(registerForm.get("lastName")?.hasError("required") && registerForm.get("lastName")?.touched)
         {
           <app-error-message message = "last name is required" />
+        }
+      </div>
+      <div class="form-group mt-4">
+        <input 
+          type = "text" 
+          id = "username"
+          placeholder="username"
+          pInputText
+          class = "w-full"
+          autocomplete="off"
+          formControlName = "username"
+          [ngClass]="{
+            'ng-invalid ng-dirty' : (registerForm.get('username')?.hasError('required') && registerForm.get('username')?.touched)
+          }"
+        />
+        @if(registerForm.get("username")?.hasError("required") && registerForm.get("username")?.touched)
+        {
+          <app-error-message message = "username is required" />
+        }
+      </div>
+      <div class="form-group mt-4">
+        <input 
+          type = "text" 
+          id = "phone"
+          placeholder="phone"
+          pInputText
+          class = "w-full"
+          autocomplete="off"
+          formControlName = "phone"
+          [ngClass]="{
+            'ng-invalid ng-dirty' : (registerForm.get('phone')?.hasError('required') && registerForm.get('phone')?.touched)
+          }"
+        />
+        @if(registerForm.get("phone")?.hasError("required") && registerForm.get("phone")?.touched)
+        {
+          <app-error-message message = "phone is required" />
+        }
+        @if(registerForm.get("phone")?.hasError("maxlength"))
+        {
+          <app-error-message message = "phone max length is 11" />
         }
       </div>
       <div class="form-group mt-4">
@@ -86,16 +126,16 @@
           placeholder="Confirm Password"
           autocomplete="off"
           [feedback]="false"
-          formControlName = "confirmPassword"
+          formControlName = "rePassword"
           [ngClass]="{
-            'ng-invalid ng-dirty' : (registerForm.get('confirmPassword')?.hasError('required') && registerForm.get('confirmPassword')?.touched) || (registerForm.hasError('mismatch') && !registerForm.get('confirmPassword')?.hasError('required'))
+            'ng-invalid ng-dirty' : (registerForm.get('rePassword')?.hasError('required') && registerForm.get('rePassword')?.touched) || (registerForm.hasError('mismatch') && !registerForm.get('rePassword')?.hasError('required'))
           }"
         />
-        @if(registerForm.get("confirmPassword")?.hasError("required") && registerForm.get("confirmPassword")?.touched)
+        @if(registerForm.get("rePassword")?.hasError("required") && registerForm.get("rePassword")?.touched)
         {
           <app-error-message message = "confirm Password is required" />
         }
-        @if(registerForm.hasError("mismatch") && !registerForm.get("confirmPassword")?.hasError("required"))
+        @if(registerForm.hasError("mismatch") && !registerForm.get("rePassword")?.hasError("required"))
         {
           <app-error-message message = "password and confirm password are not match" />
         }

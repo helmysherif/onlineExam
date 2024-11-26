@@ -1,6 +1,7 @@
 <section class="login-page">
   <div class="form-container">
-    <p class="title">sign in</p>
+    <!-- <p class="title">sign in</p> -->
+    <app-form-title text="sign in" />
     <form class = "mt-5" [formGroup]="loginForm">
       <div class="form-group">
         <input 
@@ -50,7 +51,11 @@
         }
       </div>
       <div class = "text-right mt-2">
-        <button class = "recover-password-btn">recover password?</button>
+        <button 
+          type = "button"
+          class = "recover-password-btn"
+          routerLink = "/auth/forgot-password"
+        >recover password?</button>
       </div>
       <app-button 
         buttonName = "sign in"
