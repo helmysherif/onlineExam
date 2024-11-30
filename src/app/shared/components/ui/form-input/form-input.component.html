@@ -1,0 +1,62 @@
+<div class="form-group">
+  @if(type() === 'text' || type() === 'email')
+  {
+    <input
+      [type]="type()"
+      [id]="id()"
+      [placeholder]="placeholder()"
+      pInputText
+      class="w-full"
+      autocomplete="off"
+      [value]="value"
+      [disabled]="isDisabled"
+      (input)="setValue($event)"
+      (blur)="markAsTouched()"
+      [ngClass]="{'ng-invalid ng-dirty':errors() && isTouched}"
+    />
+  } @else {
+    <p-password 
+      [toggleMask]="true" 
+      class = "password-input"
+      [placeholder]="placeholder()"
+      autocomplete="off"
+      [feedback]="false"
+      (onBlur)="markAsTouched()"
+      (input)="setValue($event)"
+      [ngClass]="{'ng-invalid ng-dirty':errors() && isTouched}"
+    />
+    <!-- {{errors() | json}} -->
+  }
+  @if(errors() && isTouched)
+  {
+    @if(errors().minlength)
+    {
+      <app-error-message 
+        [message]="placeholder() + ' has minlength is ' + errors().minlength['requiredLength']"
+      />
+    } 
+    @else if(errors().pattern || errors().email)
+    {
+      @if(errors().pattern && type() === 'password')
+      {
+        <app-error-message 
+          message="the password must contain at least 1 number and 1 capital letter"
+        />
+      } @else {
+        <app-error-message 
+          [message]="'invalid ' + placeholder() + ' value'"
+        />
+      }
+    } 
+    @else if(errors().mismatch)
+    {
+      <app-error-message 
+        message = "password and confirm password are not match"
+      />
+    }  @else {
+      <app-error-message 
+        [message]="placeholder() + ' is required'"
+      />
+    }
+  }
+</div>

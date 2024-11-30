@@ -5,14 +5,14 @@ import { PasswordModule } from 'primeng/password';
 import { ButtonComponent } from "../../../shared/components/ui/button/button.component";
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { ErrorMessageComponent } from "../../../shared/components/ui/error-message/error-message.component";
 import { AuthService } from '../../services/auth.service';
 import { Router, RouterLink } from '@angular/router';
 import { FormTitleComponent } from "../../../shared/components/ui/form-title/form-title.component";
+import { FormInputComponent } from "../../../shared/components/ui/form-input/form-input.component";
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [InputTextModule, PasswordModule, ButtonComponent, ReactiveFormsModule, CommonModule, ErrorMessageComponent, RouterLink, FormTitleComponent],
+  imports: [InputTextModule, PasswordModule, ButtonComponent, ReactiveFormsModule, CommonModule, RouterLink, FormTitleComponent, FormInputComponent],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })

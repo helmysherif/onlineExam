@@ -3,29 +3,23 @@
     <!-- <p class="title">sign in</p> -->
     <app-form-title text="sign in" />
     <form class = "mt-5" [formGroup]="loginForm">
-      <div class="form-group">
-        <input 
-          type = "email" 
-          id = "email"
-          placeholder="enter email"
-          pInputText
-          class = "w-full"
-          autocomplete="off"
-          formControlName = "email"
-          [ngClass]="{
-            'ng-invalid ng-dirty' : (loginForm.get('email')?.hasError('required') && loginForm.get('email')?.touched) || loginForm.get('email')?.hasError('email')
-          }"
-        />
-        @if(loginForm.get("email")?.hasError("required") && loginForm.get("email")?.touched)
-        {
-          <app-error-message message = "email is required" />
-        }
-        @if(loginForm.get("email")?.hasError("email"))
-        {
-          <app-error-message message = "invalid email" />
-        }
-      </div>
-      <div class="form-group mt-5">
+      <app-form-input 
+      formControlName = "email"
+      placeholder = "email"
+      type = "email"
+      id = "email"
+      [errors]="loginForm.get('email')?.errors"
+    />
+    <div class = "mt-4">
+      <app-form-input 
+        formControlName = "password"
+        placeholder = "Password"
+        type = "password"
+        id = "password"
+        [errors]="loginForm.get('password')?.errors"
+      />
+    </div>
+      <!-- <div class="form-group mt-5">
         <p-password 
           [toggleMask]="true" 
           class = "password-input"
@@ -49,7 +43,7 @@
         {
           <app-error-message message = "the password must contain at least 1 number and 1 capital letter" />
         }
-      </div>
+      </div> -->
       <div class = "text-right mt-2">
         <button 
           type = "button"

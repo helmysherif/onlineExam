@@ -1,0 +1,28 @@
+@import "../../../../styles/fonts.scss";
+.form-group {
+  position: relative;
+}
+input {
+  width: 100%;
+  &::placeholder {
+    text-transform: capitalize;
+    color: var(--grey-color);
+    @extend .inter-font;
+  }
+}
+::ng-deep .password-input
+{
+  .p-inputtext , .p-password
+  {
+    width: 100% !important;
+  }
+  .p-inputtext
+  {
+    &::placeholder
+    {
+      text-transform: capitalize !important;
+      color:var(--grey-color) !important;
+      @extend .inter-font;
+    }
+  }
+}

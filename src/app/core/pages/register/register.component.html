@@ -2,143 +2,66 @@
   <div class="form-container">
     <app-form-title text="Sign up" />
     <form [formGroup]="registerForm">
-      <div class="form-group">
-        <input 
-          type = "text" 
-          id = "fname"
-          placeholder="first name"
-          pInputText
-          class = "w-full"
-          autocomplete="off"
-          formControlName = "firstName"
-          [ngClass]="{
-            'ng-invalid ng-dirty' : (registerForm.get('firstName')?.hasError('required') && registerForm.get('firstName')?.touched)
-          }"
-        />
-        @if(registerForm.get("firstName")?.hasError("required") && registerForm.get("firstName")?.touched)
-        {
-          <app-error-message message = "first name is required" />
-        }
-      </div>
-      <div class="form-group mt-4">
-        <input 
-          type = "text" 
-          id = "lname"
-          placeholder="last name"
-          pInputText
-          class = "w-full"
-          autocomplete="off"
+      <app-form-input 
+        formControlName = "firstName"
+        placeholder = "first name"
+        type = "text"
+        id = "fname"
+        [errors]="registerForm.get('firstName')?.errors"
+      />
+      <div class = "mt-4">
+        <app-form-input 
           formControlName = "lastName"
-          [ngClass]="{
-            'ng-invalid ng-dirty' : (registerForm.get('lastName')?.hasError('required') && registerForm.get('lastName')?.touched)
-          }"
+          placeholder = "last name"
+          type = "text"
+          id = "lname"
+          [errors]="registerForm.get('lastName')?.errors"
         />
-        @if(registerForm.get("lastName")?.hasError("required") && registerForm.get("lastName")?.touched)
-        {
-          <app-error-message message = "last name is required" />
-        }
       </div>
-      <div class="form-group mt-4">
-        <input 
-          type = "text" 
-          id = "username"
-          placeholder="username"
-          pInputText
-          class = "w-full"
-          autocomplete="off"
+      <div class = "mt-4">
+        <app-form-input 
           formControlName = "username"
-          [ngClass]="{
-            'ng-invalid ng-dirty' : (registerForm.get('username')?.hasError('required') && registerForm.get('username')?.touched)
-          }"
+          placeholder = "username"
+          type = "text"
+          id = "username"
+          [errors]="registerForm.get('username')?.errors"
         />
-        @if(registerForm.get("username")?.hasError("required") && registerForm.get("username")?.touched)
-        {
-          <app-error-message message = "username is required" />
-        }
       </div>
-      <div class="form-group mt-4">
-        <input 
-          type = "text" 
-          id = "phone"
-          placeholder="phone"
-          pInputText
-          class = "w-full"
-          autocomplete="off"
+      <div class = "mt-4">
+        <app-form-input 
           formControlName = "phone"
-          [ngClass]="{
-            'ng-invalid ng-dirty' : (registerForm.get('phone')?.hasError('required') && registerForm.get('phone')?.touched)
-          }"
+          placeholder = "phone"
+          type = "text"
+          id = "phone"
+          [errors]="registerForm.get('phone')?.errors"
         />
-        @if(registerForm.get("phone")?.hasError("required") && registerForm.get("phone")?.touched)
-        {
-          <app-error-message message = "phone is required" />
-        }
-        @if(registerForm.get("phone")?.hasError("maxlength"))
-        {
-          <app-error-message message = "phone max length is 11" />
-        }
       </div>
-      <div class="form-group mt-4">
-        <input 
-          type = "email" 
-          id = "email"
-          placeholder="Email"
-          pInputText
-          class = "w-full"
-          autocomplete="off"
+      <div class = "mt-4">
+        <app-form-input 
           formControlName = "email"
+          placeholder = "email"
+          type = "email"
+          id = "email"
+          [errors]="registerForm.get('email')?.errors"
         />
-        @if(registerForm.get("email")?.hasError("required") && registerForm.get("email")?.touched)
-        {
-          <app-error-message message = "email is required" />
-        }
-        @if(registerForm.get("email")?.hasError("email"))
-        {
-          <app-error-message message = "invalid email" />
-        }
       </div>
-      <div class="form-group mt-4">
-        <p-password 
-          [toggleMask]="true" 
-          class = "password-input"
-          placeholder="Password"
-          autocomplete="off"
+      <div class = "mt-4">
+        <app-form-input 
           formControlName = "password"
-          [feedback]="false"
+          placeholder = "Password"
+          type = "password"
+          id = "password"
+          [errors]="registerForm.get('password')?.errors"
         />
-        @if(registerForm.get("password")?.hasError("required") && registerForm.get("password")?.touched)
-        {
-          <app-error-message message = "password is required" />
-        }
-        @if(registerForm.get("password")?.hasError("minlength"))
-        {
-          <app-error-message message = "the password must be not less than 6 characters" />
-        }
-        @if(registerForm.get("password")?.hasError("pattern") && !registerForm.get("password")?.hasError("minlength"))
-        {
-          <app-error-message message = "the password must contain at least 1 number and 1 capital letter" />
-        }
       </div>
-      <div class="form-group mt-4">
-        <p-password 
-          [toggleMask]="true" 
-          class = "password-input"
-          placeholder="Confirm Password"
-          autocomplete="off"
-          [feedback]="false"
+      <div class = "mt-4">
+        <app-form-input 
           formControlName = "rePassword"
-          [ngClass]="{
-            'ng-invalid ng-dirty' : (registerForm.get('rePassword')?.hasError('required') && registerForm.get('rePassword')?.touched) || (registerForm.hasError('mismatch') && !registerForm.get('rePassword')?.hasError('required'))
-          }"
+          placeholder = "Confirm Password"
+          type = "password"
+          id = "rePassword"
+          [errors]="registerForm.get('rePassword')?.errors || registerForm.errors"
         />
-        @if(registerForm.get("rePassword")?.hasError("required") && registerForm.get("rePassword")?.touched)
-        {
-          <app-error-message message = "confirm Password is required" />
-        }
-        @if(registerForm.hasError("mismatch") && !registerForm.get("rePassword")?.hasError("required"))
-        {
-          <app-error-message message = "password and confirm password are not match" />
-        }
       </div>
       <p class="account-exists">
         Already have an account?

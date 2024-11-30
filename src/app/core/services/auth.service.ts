@@ -10,6 +10,7 @@ import { LoginUser } from '../interfaces/login';
 import { LoginAPIRes, LoginRes } from '../interfaces/loginRes';
 import { ForgotPasswordRes, UserForgotPassword } from '../interfaces/forgotPassword';
 import { UserVerifyCode, VerifyCodeRes } from '../interfaces/verifyCode';
+import { ResetPassword, ResetPasswordAPIRes, ResetPasswordRes } from '../interfaces/resetPassword';
 @Injectable({
   providedIn: 'root'
 })
@@ -36,6 +37,11 @@ export class AuthService implements AuthAPI {
   verifyCode(data: UserVerifyCode): Observable<VerifyCodeRes> {
     return this._HttpClient.post<VerifyCodeRes>(AuthEndpoint.VERIFYCODE , data).pipe(
       map((res:VerifyCodeRes) => this._AuthAPIAdapter.verifyCode(res))
+    );
+  }
+  resetPassword(data:ResetPassword): Observable<ResetPasswordRes> {
+    return this._HttpClient.put<ResetPasswordAPIRes>(AuthEndpoint.RESETPASSWORD , data).pipe(
+      map((res:ResetPasswordAPIRes) => this._AuthAPIAdapter.resetPassword(res))
     );
   }
 }

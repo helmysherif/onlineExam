@@ -4,6 +4,7 @@ import { RegisterAPIRes, RegisterRes } from '../interfaces/registerRes';
 import { LoginAPIRes, LoginRes } from '../interfaces/loginRes';
 import { ForgotPasswordRes } from '../interfaces/forgotPassword';
 import { VerifyCodeRes } from '../interfaces/verifyCode';
+import { ResetPasswordAPIRes, ResetPasswordRes } from '../interfaces/resetPassword';
 @Injectable({
   providedIn: 'root'
 })
@@ -34,6 +35,11 @@ export class AuthAPIAdapter implements Adapter {
   verifyCode(data: VerifyCodeRes): VerifyCodeRes {
     return {
       status : data.status
+    } 
+  }
+  resetPassword(data: ResetPasswordAPIRes): ResetPasswordRes {
+    return {
+      message : data.message
     } 
   }
 }
