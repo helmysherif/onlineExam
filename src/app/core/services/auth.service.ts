@@ -11,6 +11,7 @@ import { LoginAPIRes, LoginRes } from '../interfaces/loginRes';
 import { ForgotPasswordRes, UserForgotPassword } from '../interfaces/forgotPassword';
 import { UserVerifyCode, VerifyCodeRes } from '../interfaces/verifyCode';
 import { ResetPassword, ResetPasswordAPIRes, ResetPasswordRes } from '../interfaces/resetPassword';
+import { LogoutRes } from '../interfaces/logout';
 @Injectable({
   providedIn: 'root'
 })
@@ -43,5 +44,8 @@ export class AuthService implements AuthAPI {
     return this._HttpClient.put<ResetPasswordAPIRes>(AuthEndpoint.RESETPASSWORD , data).pipe(
       map((res:ResetPasswordAPIRes) => this._AuthAPIAdapter.resetPassword(res))
     );
+  }
+  logout(): Observable<LogoutRes> {
+    return this._HttpClient.get<LogoutRes>(AuthEndpoint.LOGOUT);
   }
 }

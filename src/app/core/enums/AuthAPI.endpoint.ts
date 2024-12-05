@@ -6,4 +6,5 @@ export class AuthEndpoint
   static FORGOTPASSWORD = `${environment.apiUrl}/auth/forgotPassword`;
   static VERIFYCODE = `${environment.apiUrl}/auth/verifyResetCode`;
   static RESETPASSWORD = `${environment.apiUrl}/auth/resetPassword`;
+  static LOGOUT = `${environment.apiUrl}/auth/logout`;
 }

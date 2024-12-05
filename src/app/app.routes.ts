@@ -39,8 +39,23 @@ export const routes: Routes = [
     ]
   },
   {
-    path : "dashboard",
-    loadComponent : () => import("./core/layout/dashboard-layout/dashboard-layout.component").then(m => m.DashboardLayoutComponent),
-    canActivate : [AuthGuard]
+    path : "home",
+    loadComponent : () => import("./core/layout/home/home.component").then(m => m.HomeComponent),
+    canActivate : [AuthGuard],
+    children : [
+      {
+        path : "",
+        redirectTo : "dashboard",
+        pathMatch : "full"
+      },
+      {
+        path : "dashboard",
+        loadComponent : () => import("./core/pages/dashboard-page/dashboard-page.component").then(m => m.DashboardPageComponent),
+      },
+      {
+        path : "quiz-history",
+        loadComponent : () => import("./core/pages/quiz-history/quiz-history.component").then(m => m.QuizHistoryComponent),
+      }
+    ]
   }
 ];

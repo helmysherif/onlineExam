@@ -45,7 +45,7 @@ export class LoginComponent {
           if(res)
           {
             localStorage.setItem("onlineExamToken" , res.token)
-            this.router.navigateByUrl("/dashboard")
+            this.router.navigateByUrl("/home")
           }
         }
       })

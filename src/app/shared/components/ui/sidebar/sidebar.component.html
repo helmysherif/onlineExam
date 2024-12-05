@@ -1,0 +1,23 @@
+<section class="sidebar">
+  <div class="sidebar-logo">
+    <img src="images/Final Logo 1.svg" alt="">
+  </div>
+  <ul class="sidebar-links">
+    @for (link of sidebarLinks(); track $index) {
+      <li 
+        class = "sidebar-links-link" 
+        routerLinkActive = "active"
+        style = "cursor: pointer;"
+        (click)="$last ? logoutFun() : null"
+      >
+        <a [routerLink]="link.url">
+          @if(link.image)
+          {
+            <img [src]="link.image" alt="">
+          }
+          <span>{{link.title}}</span>
+        </a>
+      </li>
+    }
+  </ul>
+</section>

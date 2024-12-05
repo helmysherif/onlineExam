@@ -7,6 +7,7 @@ import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { httpLoaderInterceptor } from './core/interceptors/http-loader.interceptor';
 import { handlingErrorsInterceptor } from './core/interceptors/handling-errors.interceptor';
 import { MessageService } from 'primeng/api';
+import { httpHeadersInterceptor } from './core/interceptors/http-headers.interceptor';
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
@@ -15,7 +16,8 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(
       withInterceptors([
         httpLoaderInterceptor,
-        handlingErrorsInterceptor
+        handlingErrorsInterceptor,
+        httpHeadersInterceptor
       ])
     ),
     importProvidersFrom(

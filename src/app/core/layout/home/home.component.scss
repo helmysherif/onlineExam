@@ -1,0 +1,9 @@
+.home-section
+{
+  display: grid;
+  grid-template-columns: 17% 83%;
+  .sidebar , .content
+  {
+    height: 100vh;
+  }
+}

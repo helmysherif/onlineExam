@@ -1,0 +1,11 @@
+<section class="home-section">
+  <div class="sidebar">
+    <app-sidebar 
+      [sidebarLinks]="sidebarLinks"
+      (logout)="logout()"
+    />
+  </div>
+  <div class="content">
+    <router-outlet />
+  </div>
+</section> 
