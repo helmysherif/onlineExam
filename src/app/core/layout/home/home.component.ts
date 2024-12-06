@@ -3,11 +3,12 @@ import { SidebarComponent } from "../../../shared/components/ui/sidebar/sidebar.
 import { Router, RouterOutlet } from '@angular/router';
 import { SidebarLinks } from '../../interfaces/sidebar';
 import { AuthService } from '../../services/auth.service';
+import { NavbarComponent } from "../../../shared/components/ui/navbar/navbar.component";
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [SidebarComponent , RouterOutlet],
+  imports: [SidebarComponent, RouterOutlet, NavbarComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })

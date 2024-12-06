@@ -2,8 +2,24 @@
 {
   display: grid;
   grid-template-columns: 17% 83%;
-  .sidebar , .content
+  @media all and (max-width:1200px)
+  {
+    display: block;
+  }
+  .navbar
+  {
+    display: none;
+    @media all and (max-width:1200px)
+    {
+      display: block;
+    }
+  }
+  .sidebar
   {
     height: 100vh;
+    @media all and (max-width:1200px)
+    {
+      display: none;
+    }
   }
 }

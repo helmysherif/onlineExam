@@ -5,6 +5,12 @@
       (logout)="logout()"
     />
   </div>
+  <div class="navbar">
+    <app-navbar 
+    [sidebarLinks]="sidebarLinks"
+    (logout)="logout()"
+    />
+  </div>
   <div class="content">
     <router-outlet />
   </div>

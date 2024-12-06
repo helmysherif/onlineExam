@@ -1,8 +1,10 @@
 @import "../../../../styles/fonts";
 .sidebar
 {
-  background-color: #f1f1f1;
+  // background-color: #f1f1f1;
   height: 100%;
+  position: fixed;
+  width: 17%;
   padding: 20px;
   &-links
   {

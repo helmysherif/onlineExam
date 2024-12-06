@@ -3,7 +3,9 @@
   [ngStyle]="{
     'background' : background(),
     'color' : color(),
-    'border-radius.px' : borderRadius()
+    'border-radius.px' : borderRadius(),
+    'margin-top' : buttonName() !== 'start quiz' ? '15px' : '0',
+    'padding' : buttonName() !== 'start quiz' ? '10px 0' : '14px 0'
   }"
   (click)="clickOnBtn()"
   [type]="buttonType()"
