@@ -14,7 +14,9 @@ export class ButtonComponent {
   background:InputSignal<string> = input.required<string>();
   disabled:InputSignal<boolean> = input<boolean>(false);
   color:InputSignal<string> = input.required<string>();
+  borderColor:InputSignal<string> = input<string>('');
   borderRadius:InputSignal<number> = input<number>(15);
+  width:InputSignal<number> = input<number>(100);
   onClick:OutputEmitterRef<void> = output<void>();
   clickOnBtn()
   {

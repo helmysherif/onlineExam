@@ -1,21 +1,6 @@
-<div class="quiz-search">
-  <div class="quiz-search-input">
-    <input type="text" placeholder="search quiz" />
-    <i class = "pi pi-search"></i>
-  </div>
-  <div class="quiz-search-button">
-    <app-button 
-      buttonName = "start quiz"
-      background = "#4461F2"
-      color = "#ffffff"
-      [borderRadius] = 15
-      buttonType = "button"
-    />
-  </div>
-  <div class="quiz-search-logo">
-    <img src="images/logo.svg" alt="">
-  </div>
-</div>
+<app-search-bar 
+  (search)="search($event)"
+/>
 <section class="quizes">
   <p class="quizes-title">quizes</p>
   <div class="quizes-cards">

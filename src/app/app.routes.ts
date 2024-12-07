@@ -53,6 +53,10 @@ export const routes: Routes = [
         loadComponent : () => import("./core/pages/dashboard-page/dashboard-page.component").then(m => m.DashboardPageComponent),
       },
       {
+        path : "quiz/:id",
+        loadComponent : () => import("./core/pages/quiz-details/quiz-details.component").then(m => m.QuizDetailsComponent),
+      },
+      {
         path : "quiz-history",
         loadComponent : () => import("./core/pages/quiz-history/quiz-history.component").then(m => m.QuizHistoryComponent),
       }

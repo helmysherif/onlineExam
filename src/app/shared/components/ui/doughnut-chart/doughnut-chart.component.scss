@@ -1,0 +1,13 @@
+.card
+{
+  position: relative;
+  .number
+  {
+    position: absolute;
+    top:52%;
+    left:52%;
+    transform: translate(-50% , -50%);
+    font-size: 22px;
+    font-weight: 600;
+  }
+}

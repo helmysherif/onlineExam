@@ -1,0 +1,20 @@
+<div class="quiz-details-card">
+  <div class="left-side">
+    <img src="images/html.svg" alt="" />
+    <div class="info">
+      <p>{{ exam().title }}</p>
+      <span>{{ exam().numberOfQuestions }} questions</span>
+    </div>
+  </div>
+  <div class="right-side">
+    <p>{{ exam().duration }} minutes</p>
+    <app-button
+      buttonName="start"
+      background="#4461F2"
+      color="#ffffff"
+      [borderRadius]="15"
+      buttonType="button"
+      (onClick)="click()"
+    />
+  </div>
+</div>

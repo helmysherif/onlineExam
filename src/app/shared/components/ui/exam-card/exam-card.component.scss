@@ -1,0 +1,68 @@
+@import "../../../../styles/fonts";
+.quiz-details-card
+{
+  box-shadow: 0px 15px 40px 0px rgba(0,0,0,.1);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding:10px 20px;
+  margin-right: 36px;
+  margin-bottom: 20px;
+  @media all and (max-width:1200px)
+  {
+    margin: 20px;
+  }
+  @media all and (max-width:400px)
+  {
+    display: block;
+    text-align: center;
+  }
+  .left-side
+  {
+    display: flex;
+    align-items: center;
+    gap:20px;
+    @media all and (max-width:400px)
+    {
+      display: block;
+      text-align: center;
+    }
+    .info
+    {
+      p
+      {
+        margin: 0;
+        color:#0F0F0F;
+        margin-bottom: 10px;
+        text-transform: capitalize;
+        @extend .inter-font;
+        font-weight: 600;
+        font-size: 17px;
+        @media all and (max-width:400px)
+        {
+          padding:10px 0;
+        }
+      }
+      span
+      {
+        text-transform: capitalize;
+        color:#535353;
+        @extend .inter-font;
+      }
+    }
+  }
+  .right-side
+  {
+    p
+    {
+      margin: 0;
+      color:#0F0F0F;
+      margin-bottom: 10px;
+      text-transform: capitalize;
+      @extend .inter-font;
+      font-weight: 500;
+      font-size: 17px;
+    }
+  }
+}

@@ -1,0 +1,137 @@
+<div class="quiz-details">
+  <app-search-bar (search)="search($event)" />
+  <div class="mt-5">
+    @if(isEmpty) {
+    <p class="empty-data">there are no exams for this subject</p>
+    } @else { @for (exam of exams; track exam._id) {
+      <app-exam-card 
+        [exam]="exam"
+        (showDialog)="showInstructions(exam)"
+      />
+    } }
+  </div>
+</div>
+<p-confirmDialog #instructions key = "instructions" styleClass = "instructions-popup" [closeOnEscape]="false" >
+  <ng-template pTemplate="header">
+    <p>instructions</p>
+    <ul>
+      <!-- <li>don not press esc button to exist the exam</li> -->
+      <li>don not make refresh the page to exist the exam</li>
+    </ul>
+    <app-button
+      buttonName="start exam"
+      background="#4461F2"
+      color="#ffffff"
+      [borderRadius]="15"
+      buttonType="button"
+      (onClick)="startQuiz();instructions.hide()"
+    />
+  </ng-template>
+</p-confirmDialog>
+<p-confirmDialog #examPopup key = "exam" styleClass = "exam-popup" [closeOnEscape]="false" >
+  <ng-template pTemplate="header">
+    <div class="exam-header">
+      <p>question {{currentQuestionIndex + 1}} of {{currentExam.numberOfQuestions}}</p>
+      <app-timer 
+        [startDuration]="currentExam.duration"
+        (timerComplete)="timerComplete($event)"
+      />
+    </div>
+    <div class="exam-questions-dots">
+      @for (dot of questionsDots; track dot) {
+        <span 
+          class="dot"
+          [class.active-dot]="dot.active"
+        ></span>
+      }
+    </div>
+    <div class="exam-questions">
+      <div class="question">
+        <p>{{questions[currentQuestionIndex].question}}</p>
+        <div class="exam-answers">
+          @for (answer of questions[currentQuestionIndex].answers; track answer){
+            <div 
+              class="flex align-items-center answer"
+              [class.selected-answer]="questions[currentQuestionIndex].selectedOption && questions[currentQuestionIndex].index === $index"
+            >
+              <input 
+                type = "radio"
+                [(ngModel)]="questions[currentQuestionIndex].selectedOption"
+                [value]="answer.key" 
+                [id]="answer.key"
+                class = "answers-radiobutton"
+                (click)="getCurrentAnswer($index)"
+                (change)="selectValue(answer)"
+              />
+              <label (click)="getCurrentAnswer($index)" [for]="answer.key" class="ml-2" style = "width:100%;">
+                {{answer.answer}}
+              </label>
+            </div>
+          }
+        </div>
+      </div>
+    </div>
+    <div class="exam-buttons">
+      <app-button 
+        buttonName="back"
+        background = "#ffffff"
+        color = "#4461F2"
+        borderColor="#4461F2"
+        [borderRadius] = 25
+        buttonType = "button"
+        (onClick)="previousQuestion()"
+        [disabled]="currentQuestionIndex == 0"
+      />
+      <app-button 
+        [buttonName]="currentQuestionIndex === questions.length - 1 ? 'done' : 'next'"
+        background = "#4461F2"
+        color = "#ffffff"
+        [borderRadius] = 25
+        buttonType = "button"
+        (onClick)="currentQuestionIndex === questions.length - 1 ? calculateCorrectAnswers(examPopup) : nextQuestion()"
+        [disabled]="questions[currentQuestionIndex].selectedOption === null"
+      />
+    </div>
+  </ng-template>
+</p-confirmDialog>
+<p-confirmDialog #score key = "score" styleClass = "score-popup" [closeOnEscape]="false" >
+  <ng-template pTemplate="header">
+    <p class = "score-title">your score</p>
+    <div class="score-content">
+      <div class="score-content-chart">
+        <app-doughnut-chart 
+          [scoreNumber]="totalScore"
+        />
+      </div>
+      <div class="score-content-details">
+        <div class="correct-answers">
+          <p class="title">correct</p>
+          <p class="num">{{correctQuestions.length}}</p>
+        </div>
+        <div class="incorrect-answers">
+          <p class="title">incorrect</p>
+          <p class="num">{{questions.length - correctQuestions.length}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="score-content-buttons">
+      <app-button 
+      buttonName="close"
+      background = "#ffffff"
+      color = "#4461F2"
+      borderColor="#4461F2"
+      [borderRadius] = 25
+      buttonType = "button"
+      (onClick)="score.hide()"
+    />
+    <app-button 
+      [buttonName]="'show results'"
+      background = "#4461F2"
+      color = "#ffffff"
+      [borderRadius] = 25
+      buttonType = "button"
+      (onClick)="showResults()"
+    />
+    </div>
+  </ng-template>
+</p-confirmDialog>

@@ -1,4 +1,4 @@
-<section class="quiz">
+<section class="quiz" [routerLink]="'/home/quiz/' + quiz()._id">
   <div class="quiz-image">
     <img [src]="quiz().icon" alt="">
     <div class="quiz-name">

@@ -3,12 +3,12 @@ import { QuizCardComponent } from '../../../shared/components/ui/quiz-card/quiz-
 import { Quiz, QuizRes, Subject } from '../../interfaces/quiz';
 import { QuizesService } from '../../services/quizes.service';
 import {Subject as sub, takeUntil} from 'rxjs';
-import { ButtonComponent } from "../../../shared/components/ui/button/button.component";
 import {VirtualScrollerModule} from 'primeng/virtualscroller';
+import { SearchBarComponent } from "../../../shared/components/ui/search-bar/search-bar.component";
 @Component({
   selector: 'app-dashboard-page',
   standalone: true,
-  imports: [QuizCardComponent, ButtonComponent , VirtualScrollerModule],
+  imports: [QuizCardComponent, VirtualScrollerModule, SearchBarComponent],
   templateUrl: './dashboard-page.component.html',
   styleUrl: './dashboard-page.component.scss',
 })
@@ -32,5 +32,9 @@ export class DashboardPageComponent {
         }
       }
     })
+  }
+  search(e:string)
+  {
+    console.log(e);
   }
 }
