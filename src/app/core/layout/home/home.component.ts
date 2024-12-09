@@ -16,7 +16,10 @@ export class HomeComponent {
   constructor(
     private authService:AuthService,
     private router:Router
-  ){}
+  ){
+    console.log(window.innerWidth);
+    
+  }
   sidebarLinks:SidebarLinks[] = [
     {
       title : "dashboard",

@@ -1,15 +1,44 @@
 .home-section
 {
   display: grid;
-  grid-template-columns: 17% 83%;
-  @media all and (min-width:800px) and (max-width:1200px)
+  grid-template-columns: 25% 75%;
+  @media all and (min-width:1500px)
   {
-    grid-template-columns: 25% 75%;
+    grid-template-columns: 18% 82%;
   }
+  @media all and (min-width:1200px) and (max-width:1499px)
+  {
+    grid-template-columns: 20% 80%;
+  }
+  @media all and (min-width:1001px) and (max-width:1199px)
+  {
+    grid-template-columns: 20% 80%;
+  }
+  @media all and (min-width:851px) and (max-width:900px)
+  {
+    grid-template-columns: 30% 70%;
+  }
+  @media all and (min-width:901px) and (max-width:1000px)
+  {
+    grid-template-columns: 26% 74%;
+  }
+  @media all and (max-width:850px)
+  {
+    grid-template-columns: 26% 74%;
+  }
+  // grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  // @media all and (min-width:691px) and (max-width:1000px)
+  // {
+  //   grid-template-columns: 20% 80%;
+  // }
+  // @media all and (max-width:690px)
+  // {
+  //   grid-template-columns: 23% 77%;
+  // }
   @media all and (max-width:799px)
-    {
-      display: block;
-    }
+  {
+    display: block;
+  }
   .navbar
   {
     display: none;

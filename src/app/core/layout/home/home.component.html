@@ -1,17 +1,21 @@
 <section class="home-section">
-  <div class="sidebar">
-    <app-sidebar 
+  <div class="left">
+    <div class="sidebar">
+      <app-sidebar 
+        [sidebarLinks]="sidebarLinks"
+        (logout)="logout()"
+      />
+    </div>
+  </div>
+  <div class="right">
+    <div class="navbar">
+      <app-navbar 
       [sidebarLinks]="sidebarLinks"
       (logout)="logout()"
-    />
-  </div>
-  <div class="navbar">
-    <app-navbar 
-    [sidebarLinks]="sidebarLinks"
-    (logout)="logout()"
-    />
-  </div>
-  <div class="content">
-    <router-outlet />
+      />
+    </div>
+    <div class="content">
+      <router-outlet />
+    </div>
   </div>
 </section> 

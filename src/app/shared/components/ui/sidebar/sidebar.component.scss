@@ -6,9 +6,33 @@
   position: fixed;
   width: 17%;
   padding: 20px;
-  @media all and (min-width:769px) and (max-width:1200px)
+  // @media all and (min-width:769px) and (max-width:1200px)
+  // {
+  //   width: 25%;
+  // }
+  @media all and (min-width:1500px)
   {
-    width: 25%;
+    width: 18%;
+  }
+  @media all and (min-width:1200px) and (max-width:1499px)
+  {
+    width: 20%;
+  }
+  @media all and (min-width:1001px) and (max-width:1199px)
+  {
+    width: 20%;
+  }
+  @media all and (min-width:851px) and (max-width:900px)
+  {
+    width: 30%;
+  }
+  @media all and (min-width:901px) and (max-width:1000px)
+  {
+    width: 26%;
+  }
+  @media all and (max-width:850px)
+  {
+    width: 26%;
   }
   &-links
   {
