@@ -19,7 +19,7 @@ export class TimerComponent {
   startTimer()
   {
     let totalSeconds = this.startDuration() * 60;
-    // let totalSeconds = 15;
+    // let totalSeconds = 5;
     this.interval = setInterval(() => {
       if (totalSeconds > 0) {
         totalSeconds--;

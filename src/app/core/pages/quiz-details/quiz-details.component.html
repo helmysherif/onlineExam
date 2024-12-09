@@ -34,7 +34,7 @@
       <p>question {{currentQuestionIndex + 1}} of {{currentExam.numberOfQuestions}}</p>
       <app-timer 
         [startDuration]="currentExam.duration"
-        (timerComplete)="timerComplete($event)"
+        (timerComplete)="timerComplete($event , examPopup)"
       />
     </div>
     <div class="exam-questions-dots">
@@ -47,7 +47,7 @@
     </div>
     <div class="exam-questions">
       <div class="question">
-        <p>{{questions[currentQuestionIndex].question}}</p>
+        <p style = "min-height:60px;">{{questions[currentQuestionIndex].question}}</p>
         <div class="exam-answers">
           @for (answer of questions[currentQuestionIndex].answers; track answer){
             <div 
@@ -122,7 +122,7 @@
       borderColor="#4461F2"
       [borderRadius] = 25
       buttonType = "button"
-      (onClick)="score.hide()"
+      (onClick)="closeTotalScore(score)"
     />
     <app-button 
       [buttonName]="'show results'"

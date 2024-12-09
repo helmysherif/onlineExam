@@ -35,6 +35,7 @@ export class QuizDetailsComponent {
   answer2: any;
   currentQuestionIndex: number = 0;
   correctQuestions:any[] = [];
+  selectedAnswer:any;
   questions = [
     {
       answers: [
@@ -67,19 +68,19 @@ export class QuizDetailsComponent {
           answer: 'Google',
           key: 'A2',
         },
-        {
-          answer: 'Mozilla',
-          key: 'A3',
-        },
+        // {
+        //   answer: 'Mozilla',
+        //   key: 'A3',
+        // },
         {
           answer: 'The World Wide Web Consortium',
-          key: 'A4',
+          key: 'A3',
         },
       ],
       _id: '6700829e0a5849a4aee16297',
       selectedOption: '',
       question: 'Who is making the Web standards?',
-      correct: 'A4',
+      correct: 'A3',
       index : 0
     },
     {
@@ -103,6 +104,111 @@ export class QuizDetailsComponent {
       selectedOption: '',
       index : 0
     },
+    {
+      answers: [
+        {
+          answer: "Java",
+          key: 'A1',
+        },
+        {
+          answer: "C++",
+          key: 'A2',
+        },
+        {
+          answer: "C#",
+          key: 'A3',
+        },
+      ],
+      _id: '670085a00a5849a4aee162af',
+      question: 'Which of the following languages is used as a scripting language in the Unity 3D game engine?',
+      correct: 'A3',
+      selectedOption: '',
+      index : 0
+    },
+    {
+      answers: [
+        {
+          answer: "32 bits",
+          key: 'A1',
+        },
+        {
+          answer: "64 bits",
+          key: 'A2',
+        },
+        {
+          answer: "128 bits",
+          key: 'A3',
+        },
+      ],
+      _id: '670085a00a5849a4aee162af',
+      question: 'How long is an IPv6 address?',
+      correct: 'A3',
+      selectedOption: '',
+      index : 0
+    },
+    {
+      answers: [
+        {
+          answer: "Internet as a Service",
+          key: 'A1',
+        },
+        {
+          answer: "Infrastructure as a Service",
+          key: 'A2',
+        },
+        {
+          answer: "Infrastructure as a Server",
+          key: 'A3',
+        },
+      ],
+      _id: '670085a00a5849a4aee162af',
+      question: 'In the server hosting industry IaaS stands for...',
+      correct: 'A2',
+      selectedOption: '',
+      index : 0
+    },
+    {
+      answers: [
+        {
+          answer: "Comprehensive documentation",
+          key: 'A1',
+        },
+        {
+          answer: "Individuals and interactions",
+          key: 'A2',
+        },
+        {
+          answer: "Responding to change",
+          key: 'A3',
+        },
+      ],
+      _id: '670085a00a5849a4aee162af',
+      question: 'Which of these is not a key value of Agile software development?',
+      correct: 'A1',
+      selectedOption: '',
+      index : 0
+    },
+    {
+      answers: [
+        {
+          answer: "LI Xiaoxia (China)",
+          key: 'A1',
+        },
+        {
+          answer: "DING Ning (China)",
+          key: 'A2',
+        },
+        {
+          answer: "Song KIM (North Korea)",
+          key: 'A3',
+        },
+      ],
+      _id: '670085a00a5849a4aee162af',
+      question: 'Which female player won the gold medal of table tennis singles in 2016 Olympics Games?',
+      correct: 'A2',
+      selectedOption: '',
+      index : 0
+    }
   ];
   exams: Exam[] = [];
   constructor(
@@ -155,12 +261,41 @@ export class QuizDetailsComponent {
       key: 'exam',
     });
   }
-  timerComplete(e: boolean) {
+  calculateTotalScore()
+  {
+    this.questions.forEach((q:any) => {
+      if(q.selectedOption && q.selectedOption === q.correct)
+      {
+        this.correctQuestions.push({
+          id : q._id,
+          selectedOption : q.selectedOption,
+          correct : q.correct
+        })
+      }
+    })
+    this.totalScore = Math.round((this.correctQuestions.length / this.questions.length) * 100)
+  }
+  timerComplete(e: boolean , examPopup:any) {
     if (e) {
-      this.confirmationService.close();
+      // this.confirmationService.close();
+      this.questionsDots = [];
+      examPopup.hide();
+      this.calculateTotalScore();
+      this.confirmationService.confirm({
+        key: 'score',
+      });
     }
   }
-  selectedAnswer:any;
+  closeTotalScore(score:any)
+  {
+    this.totalScore = 0;
+    this.correctQuestions = [];
+    this.questions.forEach((q:any) => {
+      q.selectedOption = null;
+    })
+    this.currentQuestionIndex = 0;
+    score.hide();
+  }
   selectValue(e:any)
   {
     this.selectedAnswer = e;
@@ -191,17 +326,7 @@ export class QuizDetailsComponent {
   calculateCorrectAnswers(examPopup:any)
   {
     this.correctQuestions = []
-    this.questions.forEach((q:any) => {
-      if(q.selectedOption && q.selectedOption === q.correct)
-      {
-        this.correctQuestions.push({
-          id : q._id,
-          selectedOption : q.selectedOption,
-          correct : q.correct
-        })
-      }
-    })
-    this.totalScore = Math.round((this.correctQuestions.length / this.questions.length) * 100)
+    this.calculateTotalScore();
     this.questionsDots = [];
     this.currentQuestionIndex = 0;
     this.questions.forEach((q:any) => {
