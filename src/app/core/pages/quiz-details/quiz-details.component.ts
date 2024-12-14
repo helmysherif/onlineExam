@@ -11,6 +11,7 @@ import { TimerComponent } from '../../../shared/components/ui/timer/timer.compon
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { FormsModule } from '@angular/forms';
 import { DoughnutChartComponent } from "../../../shared/components/ui/doughnut-chart/doughnut-chart.component";
+import { Question, QuestionRes } from '../../interfaces/question';
 @Component({
   selector: 'app-quiz-details',
   standalone: true,
@@ -36,180 +37,7 @@ export class QuizDetailsComponent {
   currentQuestionIndex: number = 0;
   correctQuestions:any[] = [];
   selectedAnswer:any;
-  questions = [
-    {
-      answers: [
-        {
-          answer: 'Hyperlinks and Text Markup Language',
-          key: 'A1',
-        },
-        {
-          answer: 'Hyper Text Markup Language',
-          key: 'A2',
-        },
-        {
-          answer: 'Home Tool Markup Language',
-          key: 'A3',
-        },
-      ],
-      _id: '670082800a5849a4aee16294',
-      selectedOption: '',
-      question: 'What does HTML stand for?',
-      correct: 'A2',
-      index : 0
-    },
-    {
-      answers: [
-        {
-          answer: 'Microsoft',
-          key: 'A1',
-        },
-        {
-          answer: 'Google',
-          key: 'A2',
-        },
-        // {
-        //   answer: 'Mozilla',
-        //   key: 'A3',
-        // },
-        {
-          answer: 'The World Wide Web Consortium',
-          key: 'A3',
-        },
-      ],
-      _id: '6700829e0a5849a4aee16297',
-      selectedOption: '',
-      question: 'Who is making the Web standards?',
-      correct: 'A3',
-      index : 0
-    },
-    {
-      answers: [
-        {
-          answer: "<a href='url' new>",
-          key: 'A1',
-        },
-        {
-          answer: "<a href='url' target='new'>",
-          key: 'A2',
-        },
-        {
-          answer: "<a href='url' target='_blank'>",
-          key: 'A3',
-        },
-      ],
-      _id: '670085a00a5849a4aee162af',
-      question: 'How can you open a link in a new tab/browser window?',
-      correct: 'A3',
-      selectedOption: '',
-      index : 0
-    },
-    {
-      answers: [
-        {
-          answer: "Java",
-          key: 'A1',
-        },
-        {
-          answer: "C++",
-          key: 'A2',
-        },
-        {
-          answer: "C#",
-          key: 'A3',
-        },
-      ],
-      _id: '670085a00a5849a4aee162af',
-      question: 'Which of the following languages is used as a scripting language in the Unity 3D game engine?',
-      correct: 'A3',
-      selectedOption: '',
-      index : 0
-    },
-    {
-      answers: [
-        {
-          answer: "32 bits",
-          key: 'A1',
-        },
-        {
-          answer: "64 bits",
-          key: 'A2',
-        },
-        {
-          answer: "128 bits",
-          key: 'A3',
-        },
-      ],
-      _id: '670085a00a5849a4aee162af',
-      question: 'How long is an IPv6 address?',
-      correct: 'A3',
-      selectedOption: '',
-      index : 0
-    },
-    {
-      answers: [
-        {
-          answer: "Internet as a Service",
-          key: 'A1',
-        },
-        {
-          answer: "Infrastructure as a Service",
-          key: 'A2',
-        },
-        {
-          answer: "Infrastructure as a Server",
-          key: 'A3',
-        },
-      ],
-      _id: '670085a00a5849a4aee162af',
-      question: 'In the server hosting industry IaaS stands for...',
-      correct: 'A2',
-      selectedOption: '',
-      index : 0
-    },
-    {
-      answers: [
-        {
-          answer: "Comprehensive documentation",
-          key: 'A1',
-        },
-        {
-          answer: "Individuals and interactions",
-          key: 'A2',
-        },
-        {
-          answer: "Responding to change",
-          key: 'A3',
-        },
-      ],
-      _id: '670085a00a5849a4aee162af',
-      question: 'Which of these is not a key value of Agile software development?',
-      correct: 'A1',
-      selectedOption: '',
-      index : 0
-    },
-    {
-      answers: [
-        {
-          answer: "LI Xiaoxia (China)",
-          key: 'A1',
-        },
-        {
-          answer: "DING Ning (China)",
-          key: 'A2',
-        },
-        {
-          answer: "Song KIM (North Korea)",
-          key: 'A3',
-        },
-      ],
-      _id: '670085a00a5849a4aee162af',
-      question: 'Which female player won the gold medal of table tennis singles in 2016 Olympics Games?',
-      correct: 'A2',
-      selectedOption: '',
-      index : 0
-    }
-  ];
+  questions:Question[] = [];
   exams: Exam[] = [];
   constructor(
     private quizService: QuizesService,
@@ -244,19 +72,29 @@ export class QuizDetailsComponent {
   questionsDots: any[] = [];
   showInstructions(exam: Exam) {
     this.currentExam = exam;
-    for (let index = 0; index < exam.numberOfQuestions; index++) {
-      this.questionsDots.push({
-        index: index,
-        active: false,
-      });
-    }
-    this.questionsDots[0].active = true;
     this.confirmationService.confirm({
       key: 'instructions',
       // key: 'score',
     });
   }
   startQuiz() {
+    console.log(this.currentExam);
+    this.quizService.ExamQuestions(this.currentExam._id).subscribe({
+      next : (res:QuestionRes) => {
+        console.log(res);
+        if(res.message === 'success')
+        {
+          this.questions = res.questions;
+          for (let index = 0; index < res.questions.length; index++) {
+            this.questionsDots.push({
+              index: index,
+              active: false,
+            });
+          }
+          this.questionsDots[0].active = true;
+        }
+      }
+    })
     this.confirmationService.confirm({
       key: 'exam',
     });

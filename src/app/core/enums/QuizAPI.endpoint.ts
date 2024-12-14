@@ -3,4 +3,5 @@ export class QuizEndpoint
 {
   static QUIZES = `${environment.apiUrl}/subjects`;
   static QUIZEEXAMS = `${environment.apiUrl}/exams?subject=`;
+  static EXAMQUESTIONS = `${environment.apiUrl}/questions?exam=`;
 }

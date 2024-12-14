@@ -269,3 +269,13 @@
     display: none !important;
   }
 }
+.empty-questions
+{
+  margin: 0;
+  text-align: center;
+  text-transform: capitalize;
+  font-size: 20px;
+  color:var(--dark-blue-color);
+  font-style: italic;
+  @extend .inter-font;
+}

@@ -30,68 +30,73 @@
 </p-confirmDialog>
 <p-confirmDialog #examPopup key = "exam" styleClass = "exam-popup" [closeOnEscape]="false" >
   <ng-template pTemplate="header">
-    <div class="exam-header">
-      <p>question {{currentQuestionIndex + 1}} of {{currentExam.numberOfQuestions}}</p>
-      <app-timer 
-        [startDuration]="currentExam.duration"
-        (timerComplete)="timerComplete($event , examPopup)"
-      />
-    </div>
-    <div class="exam-questions-dots">
-      @for (dot of questionsDots; track dot) {
-        <span 
-          class="dot"
-          [class.active-dot]="dot.active"
-        ></span>
-      }
-    </div>
-    <div class="exam-questions">
-      <div class="question">
-        <p style = "min-height:60px;">{{questions[currentQuestionIndex].question}}</p>
-        <div class="exam-answers">
-          @for (answer of questions[currentQuestionIndex].answers; track answer){
-            <div 
-              class="flex align-items-center answer"
-              [class.selected-answer]="questions[currentQuestionIndex].selectedOption && questions[currentQuestionIndex].index === $index"
-            >
-              <input 
-                type = "radio"
-                [(ngModel)]="questions[currentQuestionIndex].selectedOption"
-                [value]="answer.key" 
-                [id]="answer.key"
-                class = "answers-radiobutton"
-                (click)="getCurrentAnswer($index)"
-                (change)="selectValue(answer)"
-              />
-              <label (click)="getCurrentAnswer($index)" [for]="answer.key" class="ml-2" style = "width:100%;">
-                {{answer.answer}}
-              </label>
-            </div>
-          }
+    @if(questions && questions.length !== 0)
+    {
+      <div class="exam-header">
+        <p>question {{currentQuestionIndex + 1}} of {{currentExam.numberOfQuestions}}</p>
+        <app-timer 
+          [startDuration]="currentExam.duration"
+          (timerComplete)="timerComplete($event , examPopup)"
+        />
+      </div>
+      <div class="exam-questions-dots">
+        @for (dot of questionsDots; track dot) {
+          <span 
+            class="dot"
+            [class.active-dot]="dot.active"
+          ></span>
+        }
+      </div>
+      <div class="exam-questions">
+        <div class="question">
+          <p style = "min-height:60px;">{{questions[currentQuestionIndex].question}}</p>
+          <div class="exam-answers">
+            @for (answer of questions[currentQuestionIndex].answers; track answer){
+              <div 
+                class="flex align-items-center answer"
+                [class.selected-answer]="questions[currentQuestionIndex].selectedOption && questions[currentQuestionIndex].index === $index"
+              >
+                <input 
+                  type = "radio"
+                  [(ngModel)]="questions[currentQuestionIndex].selectedOption"
+                  [value]="answer.key" 
+                  [id]="answer.key"
+                  class = "answers-radiobutton"
+                  (click)="getCurrentAnswer($index)"
+                  (change)="selectValue(answer)"
+                />
+                <label (click)="getCurrentAnswer($index)" [for]="answer.key" class="ml-2" style = "width:100%;">
+                  {{answer.answer}}
+                </label>
+              </div>
+            }
+          </div>
         </div>
       </div>
-    </div>
-    <div class="exam-buttons">
-      <app-button 
-        buttonName="back"
-        background = "#ffffff"
-        color = "#4461F2"
-        borderColor="#4461F2"
-        [borderRadius] = 25
-        buttonType = "button"
-        (onClick)="previousQuestion()"
-        [disabled]="currentQuestionIndex == 0"
-      />
-      <app-button 
-        [buttonName]="currentQuestionIndex === questions.length - 1 ? 'done' : 'next'"
-        background = "#4461F2"
-        color = "#ffffff"
-        [borderRadius] = 25
-        buttonType = "button"
-        (onClick)="currentQuestionIndex === questions.length - 1 ? calculateCorrectAnswers(examPopup) : nextQuestion()"
-        [disabled]="questions[currentQuestionIndex].selectedOption === null"
-      />
-    </div>
+      <div class="exam-buttons">
+        <app-button 
+          buttonName="back"
+          background = "#ffffff"
+          color = "#4461F2"
+          borderColor="#4461F2"
+          [borderRadius] = 25
+          buttonType = "button"
+          (onClick)="previousQuestion()"
+          [disabled]="currentQuestionIndex == 0"
+        />
+        <app-button 
+          [buttonName]="currentQuestionIndex === questions.length - 1 ? 'done' : 'next'"
+          background = "#4461F2"
+          color = "#ffffff"
+          [borderRadius] = 25
+          buttonType = "button"
+          (onClick)="currentQuestionIndex === questions.length - 1 ? calculateCorrectAnswers(examPopup) : nextQuestion()"
+          [disabled]="!questions[currentQuestionIndex].selectedOption"
+        />
+      </div>
+    } @else {
+      <p class = "empty-questions">there are no questions</p>
+    }
   </ng-template>
 </p-confirmDialog>
 <p-confirmDialog #score key = "score" styleClass = "score-popup" [closeOnEscape]="false" >
