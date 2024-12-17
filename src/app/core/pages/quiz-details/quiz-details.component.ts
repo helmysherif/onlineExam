@@ -38,6 +38,7 @@ export class QuizDetailsComponent {
   correctQuestions:any[] = [];
   selectedAnswer:any;
   questions:Question[] = [];
+  wrongQuestions:Question[] = [];
   exams: Exam[] = [];
   constructor(
     private quizService: QuizesService,
@@ -167,9 +168,9 @@ export class QuizDetailsComponent {
     this.calculateTotalScore();
     this.questionsDots = [];
     this.currentQuestionIndex = 0;
-    this.questions.forEach((q:any) => {
-      q.selectedOption = null;
-    })
+    // this.questions.forEach((q:any) => {
+    //   q.selectedOption = null;
+    // })
     examPopup.hide();
     this.confirmationService.confirm({
       key: 'score',
@@ -182,6 +183,17 @@ export class QuizDetailsComponent {
   }
   showResults()
   {
-    
+    this.wrongQuestions = this.questions.filter(q => q.selectedOption !== q.correct);
+    console.log(this.questions);
+    console.log(this.wrongQuestions);
+    this.confirmationService.confirm({
+      key: 'show-results',
+    });
+  }
+  closeShowResults()
+  {
+    this.questions.forEach((q:any) => {
+      q.selectedOption = null;
+    })
   }
 }

@@ -119,7 +119,10 @@
         </div>
       </div>
     </div>
-    <div class="score-content-buttons">
+    <div 
+      class="score-content-buttons"
+      [class.single-btn]="questions.length - correctQuestions.length !== 0"
+    >
       <app-button 
       buttonName="close"
       background = "#ffffff"
@@ -129,14 +132,60 @@
       buttonType = "button"
       (onClick)="closeTotalScore(score)"
     />
+    @if(questions.length - correctQuestions.length !== 0)
+    {
+      <app-button 
+        [buttonName]="'show results'"
+        background = "#4461F2"
+        color = "#ffffff"
+        [borderRadius] = 25
+        buttonType = "button"
+        (onClick)="showResults();score.hide()"
+      />
+    }
+    </div>
+  </ng-template>
+</p-confirmDialog>
+<p-confirmDialog #showResultsPopup key = "show-results" styleClass = "score-popup show-results-popup" [closeOnEscape]="false" >
+  <ng-template pTemplate="header">
+    <div class="grid" style = "max-height:500px;overflow:auto;">
+      @for (wrongQuestion of wrongQuestions; track wrongQuestion._id) {
+        <div class="col-6">
+          <div class="wrong-question">
+            <p>{{wrongQuestion.question}}</p>
+            <div class="answers mt-4">
+              @for (answer of wrongQuestion.answers; track answer.key) {
+                <div 
+                  class="answer flex align-items-center answer"
+                  [class.wrong-answer]="answer.key === wrongQuestion.selectedOption"
+                  [class.right-answer]="answer.key === wrongQuestion.correct"
+                >
+                <input 
+                  type = "radio"
+                  [value]="answer.key" 
+                  [id]="answer.key"
+                  class = "answers-radiobutton"
+                  [(ngModel)]="wrongQuestion.selectedOption"
+                  disabled
+                />
+                <label (click)="getCurrentAnswer($index)" class="ml-2" style = "width:100%;word-break:break-all;">
+                  {{answer.answer}}
+                </label>
+              </div>
+              }
+            </div>
+          </div>
+        </div>
+      }
+    </div>
     <app-button 
-      [buttonName]="'show results'"
+      buttonName="close"
       background = "#4461F2"
       color = "#ffffff"
-      [borderRadius] = 25
+      borderColor="#4461F2"
+      [borderRadius] = 10
       buttonType = "button"
-      (onClick)="showResults()"
+      (onClick)="closeShowResults();showResultsPopup.hide()"
     />
-    </div>
   </ng-template>
 </p-confirmDialog>
