@@ -4,6 +4,7 @@ import { Router, RouterOutlet } from '@angular/router';
 import { SidebarLinks } from '../../interfaces/sidebar';
 import { AuthService } from '../../services/auth.service';
 import { NavbarComponent } from "../../../shared/components/ui/navbar/navbar.component";
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-home',
@@ -15,7 +16,8 @@ import { NavbarComponent } from "../../../shared/components/ui/navbar/navbar.com
 export class HomeComponent {
   constructor(
     private authService:AuthService,
-    private router:Router
+    private router:Router,
+    private cookie:CookieService
   ){
     console.log(window.innerWidth);
     
@@ -42,10 +44,11 @@ export class HomeComponent {
       next : (res) => {
         if(res.message === 'success')
         {
-          this.router.navigateByUrl("/");
-          if(localStorage.getItem("onlineExamToken"))
-          {
-            localStorage.removeItem("onlineExamToken")
+          const onlineExamToken = this.cookie.get("onlineExamToken")
+          if(onlineExamToken)
+            {
+              this.cookie.delete("onlineExamToken");
+              this.router.navigateByUrl("/");
           }
         }
       }

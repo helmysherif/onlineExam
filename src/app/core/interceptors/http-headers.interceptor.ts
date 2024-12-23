@@ -1,6 +1,10 @@
 import { HttpInterceptorFn } from '@angular/common/http';
+import { inject } from '@angular/core';
+import { CookieService } from 'ngx-cookie-service';
 export const httpHeadersInterceptor: HttpInterceptorFn = (req, next) => {
-  if(localStorage.getItem("onlineExamToken"))
+  const cookie = inject(CookieService);
+  const onlineExamToken = cookie.get("onlineExamToken");
+  if(onlineExamToken)
   {
     const excludedUrls = ['/auth/signup' , '/auth/signin' , '/auth/forgotPassword' , '/auth/verifyResetCode' , '/auth/resetPassword'];
     const isExcluded = excludedUrls.some(url => req.url.includes(url));
@@ -8,10 +12,9 @@ export const httpHeadersInterceptor: HttpInterceptorFn = (req, next) => {
     {
       return next(req);
     }
-    const token = localStorage.getItem("onlineExamToken");
     const authReq = req.clone({
       setHeaders: {
-        token: `${token}`,
+        token: `${onlineExamToken}`,
       },
     });
     return next(authReq);

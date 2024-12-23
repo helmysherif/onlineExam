@@ -1,9 +1,11 @@
 import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 export const AuthGuard: CanActivateFn = (route, state) => {
-  const token = localStorage.getItem('onlineExamToken');
+  const cookie = inject(CookieService);
+  const onlineExamToken = cookie.get("onlineExamToken");
   const router = inject(Router);
-  if(token)
+  if(onlineExamToken)
   {
     return true;
   } else {

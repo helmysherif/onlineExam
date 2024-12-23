@@ -9,6 +9,7 @@ import { AuthService } from '../../services/auth.service';
 import { Router, RouterLink } from '@angular/router';
 import { FormTitleComponent } from "../../../shared/components/ui/form-title/form-title.component";
 import { FormInputComponent } from "../../../shared/components/ui/form-input/form-input.component";
+import { CookieService } from 'ngx-cookie-service';
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -21,7 +22,8 @@ export class LoginComponent {
   constructor(
     private fb:FormBuilder,
     private authService:AuthService,
-    private router:Router
+    private router:Router,
+    private cookie:CookieService
   ){}
   ngOnInit()
   {
@@ -44,7 +46,8 @@ export class LoginComponent {
         next : (res:LoginRes) => {
           if(res)
           {
-            localStorage.setItem("onlineExamToken" , res.token)
+            // localStorage.setItem("onlineExamToken" , res.token)
+            this.cookie.set("onlineExamToken" , res.token);
             this.router.navigateByUrl("/home")
           }
         }

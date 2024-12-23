@@ -8,6 +8,8 @@ import { httpLoaderInterceptor } from './core/interceptors/http-loader.intercept
 import { handlingErrorsInterceptor } from './core/interceptors/handling-errors.interceptor';
 import { MessageService } from 'primeng/api';
 import { httpHeadersInterceptor } from './core/interceptors/http-headers.interceptor';
+import {CookieService} from 'ngx-cookie-service';
+
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
@@ -28,6 +30,9 @@ export const appConfig: ApplicationConfig = {
         type: 'square-jelly-box'
       })
     ),
-    MessageService
+    MessageService,
+    importProvidersFrom(
+      CookieService
+    )
   ]
 };
