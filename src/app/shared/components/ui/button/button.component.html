@@ -4,8 +4,8 @@
     'background' : background(),
     'color' : color(),
     'border-radius.px' : borderRadius(),
-    'margin-top' : buttonName() !== 'start quiz' && buttonName() !== 'start' ? '15px' : '0',
-    'padding' : buttonName() === 'start' ? '5px 0' : buttonName() !== 'start quiz' ? '10px 0' : '13px 0',
+    'margin-top' : buttonName() !== 'start quiz' && buttonName() !== 'start exam' && buttonName() !== 'start' ? '15px' : '0',
+    'padding' : buttonName() === 'start' ? '5px 0' : (buttonName() !== 'start quiz' && buttonName() !== 'start exam') ? '10px 0' : '13px 0',
     'width' : width() + '%',
     'border-color' : borderColor() ? borderColor() : background() 
   }"

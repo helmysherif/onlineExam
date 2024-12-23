@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, signal, WritableSignal } from '@angular/core';
 import { QuizCardComponent } from '../../../shared/components/ui/quiz-card/quiz-card.component';
 import { Quiz, QuizRes, Subject } from '../../interfaces/quiz';
 import { QuizesService } from '../../services/quizes.service';
 import {Subject as sub, takeUntil} from 'rxjs';
 import {VirtualScrollerModule} from 'primeng/virtualscroller';
 import { SearchBarComponent } from "../../../shared/components/ui/search-bar/search-bar.component";
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-dashboard-page',
   standalone: true,
@@ -13,8 +14,9 @@ import { SearchBarComponent } from "../../../shared/components/ui/search-bar/sea
   styleUrl: './dashboard-page.component.scss',
 })
 export class DashboardPageComponent {
-  constructor(private quizService: QuizesService) {}
-  subjects:Subject[] = [];
+  constructor(private quizService: QuizesService , private router:Router) {}
+  // subjects:Subject[] = [];
+  subjects:WritableSignal<Subject[]> = signal([]);
   endSubs$:sub<any> = new sub();
   ngOnInit() {
     this.getAllQuizes();
@@ -28,13 +30,17 @@ export class DashboardPageComponent {
       next : (res:Quiz) => {
         if(res.message === 'success')
         {
-          this.subjects = res.subjects;
+          this.subjects.set(res.subjects)
         }
       }
     })
   }
-  search(e:string)
+  search(searchInput:string)
   {
-    console.log(e);
+    let isSubjectExists = this.subjects().filter(s => s.name.toLowerCase() === searchInput.toLowerCase())[0];
+    if(isSubjectExists)
+    {
+      this.router.navigateByUrl(`/home/quiz/${isSubjectExists._id}`);
+    }
   }
 }

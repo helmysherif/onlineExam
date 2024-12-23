@@ -1,15 +1,16 @@
 <div class="quiz-search">
   <div class="quiz-search-input">
-    <input type="text" placeholder="search quiz" (input)="searchInput($event)" />
+    <input type="text" placeholder="search quiz" (input)="getSearchValue($event)" />
     <i class = "pi pi-search"></i>
   </div>
   <div class="quiz-search-button">
     <app-button 
-      buttonName = "start quiz"
+      [buttonName] = 'buttonName()'
       background = "#4461F2"
       color = "#ffffff"
       [borderRadius] = 15
       buttonType = "button"
+      (onClick)="searchInput()"
     />
   </div>
   <div class="quiz-search-logo">

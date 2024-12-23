@@ -1,4 +1,4 @@
-import { Component, output, OutputEmitterRef } from '@angular/core';
+import { Component, input, InputSignal, output, OutputEmitterRef, signal } from '@angular/core';
 import { ButtonComponent } from "../button/button.component";
 
 @Component({
@@ -10,8 +10,15 @@ import { ButtonComponent } from "../button/button.component";
 })
 export class SearchBarComponent {
   search:OutputEmitterRef<string> = output<string>();
-  searchInput(e:any)
+  buttonName:InputSignal<string> = input.required<string>();
+  inputValue = signal("");
+  searchInput()
   {
-    this.search.emit(e.target.value);
+    this.search.emit(this.inputValue());
+  }
+  getSearchValue(e:Event)
+  {
+    const inputValue = (e.target as HTMLInputElement).value;
+    this.inputValue.set(inputValue);
   }
 }

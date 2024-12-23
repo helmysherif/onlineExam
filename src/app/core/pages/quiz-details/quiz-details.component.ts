@@ -66,13 +66,12 @@ export class QuizDetailsComponent {
         },
       });
   }
-  search(e: string) {
-    console.log(e);
-  }
+
   currentExam!: Exam;
   questionsDots: any[] = [];
   showInstructions(exam: Exam) {
     this.currentExam = exam;
+    console.log(this.currentExam);
     this.confirmationService.confirm({
       key: 'instructions',
       // key: 'score',
@@ -92,7 +91,10 @@ export class QuizDetailsComponent {
               active: false,
             });
           }
-          this.questionsDots[0].active = true;
+          if(this.questionsDots[0])
+          {
+            this.questionsDots[0].active = true;
+          }
         }
       }
     })
@@ -195,5 +197,12 @@ export class QuizDetailsComponent {
     this.questions.forEach((q:any) => {
       q.selectedOption = null;
     })
+  }
+  search(searchedExam: string) {
+    let selectedExam = this.exams.filter(e => e.title.toLowerCase() === searchedExam.toLowerCase())[0];
+    if(selectedExam)
+    {
+      this.showInstructions(selectedExam)
+    }
   }
 }

@@ -1,10 +1,11 @@
 <app-search-bar 
   (search)="search($event)"
+  buttonName = "start quiz"
 />
 <section class="quizes">
   <p class="quizes-title">quizes</p>
   <div class="quizes-cards">
-    @for (quiz of subjects; track quiz._id) {
+    @for (quiz of subjects(); track quiz._id) {
       <div class="quizes-cards-card">
         <app-quiz-card 
           [quiz]="quiz"
