@@ -23,7 +23,7 @@ export class LoginComponent {
     private fb:FormBuilder,
     private authService:AuthService,
     private router:Router,
-    private cookie:CookieService
+    private cookie:CookieService,
   ){}
   ngOnInit()
   {
@@ -35,7 +35,7 @@ export class LoginComponent {
         Validators.pattern(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/),
         Validators.minLength(6)
       ]]
-    })  
+    })
   }
   signIn()
   {

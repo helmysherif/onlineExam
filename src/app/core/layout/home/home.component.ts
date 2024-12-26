@@ -46,9 +46,9 @@ export class HomeComponent {
         {
           const onlineExamToken = this.cookie.get("onlineExamToken")
           if(onlineExamToken)
-            {
-              this.cookie.delete("onlineExamToken");
-              this.router.navigateByUrl("/");
+          {
+            this.cookie.delete("onlineExamToken");
+            this.router.navigateByUrl("/");
           }
         }
       }

@@ -2,25 +2,63 @@
   <div class="auth-layout-card grid">
     <div class="auth-layout-card-left lg:col-6 md:col-6 sm:col-12">
       <p class="welcome-text">
-        welcome to <br> <span>elevate</span>
+        welcome to <br />
+        <span>elevate</span>
       </p>
-      <p class="welcome-desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis, provident.</p>
-      <img src="images/bro.svg" alt="">
+      <p class="welcome-desc">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis,
+        provident.
+      </p>
+      <img src="images/bro.svg" alt="" />
     </div>
     <div class="auth-layout-card-right lg:col-6 md:col-6 sm:col-12">
       <div class="tabs-view">
-        <p-dropdown 
-          [options]="languages" 
-          [(ngModel)]="selectedLang" 
+        <p-dropdown
+          [options]="languages"
+          [(ngModel)]="selectedLang"
           optionLabel="name"
-          placeholder="select language" 
-          class = "languages-dropdown"
+          placeholder="select language"
+          class="languages-dropdown"
         />
-        <button routerLinkActive="active" class = "signin-btn" routerLink="login">sign in</button>
-        <button routerLinkActive="active" class = "signin-btn" routerLink="register">register</button>
+        <button routerLinkActive="active" class="signin-btn" routerLink="login">
+          sign in
+        </button>
+        <button
+          routerLinkActive="active"
+          class="signin-btn"
+          routerLink="register"
+        >
+          register
+        </button>
       </div>
       <div class="auth-form">
         <router-outlet />
+        <div class="divider">
+          <span>Or Continue with</span>
+        </div>
+        <div class="social-media-links">
+          <div><img src="images/google.svg" alt="" /></div>
+          <div><img src="images/twitter.svg" alt="" /></div>
+          <div><img src="images/facebook.svg" alt="" /></div>
+          <div><img src="images/apple.svg" alt="" /></div>
+        </div>
+        <div
+          id="g_id_onload"
+          data-client_id="998031629579-uf1q0l0fmmqeel8np4f93gs3virsi0r8.apps.googleusercontent.com"
+          data-context="signin"
+          data-ux_mode="popup"
+          data-itp_support="true"
+          data-callback="handleCredentialResponse"
+        ></div>
+        <div
+          class="g_id_signin"
+          data-type="standard"
+          data-shape="pill"
+          data-theme="filled_blue"
+          data-text="signin_with"
+          data-size="large"
+          data-logo_alignment="left"
+        ></div>
       </div>
     </div>
   </div>
